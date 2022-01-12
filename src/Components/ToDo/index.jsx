@@ -16,14 +16,11 @@ const ToDo = () => {
         <Button primary>Adicionar</Button>
       </Card>
 
-      {/*
-        <Container>
+      <Container>
         <TodoCard>Task#1</TodoCard>
         <TodoCard>Task#2</TodoCard>
         <TodoCard>Task#3</TodoCard>
       </Container>
-     */}
-      <Container>{todoList}</Container>
     </>
   );
 };
