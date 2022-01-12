@@ -7,7 +7,7 @@ const cardSize = {
 };
 
 export const Button = styled.button`
-  color: ${(props) => (props.primary ? "green" : "tomato")};
+  color: ${(props) => (props.primary ? "forestgreen" : "tomato")};
   border-radius: 5px;
   background-color: transparent;
   border: 2px solid darkgrey;

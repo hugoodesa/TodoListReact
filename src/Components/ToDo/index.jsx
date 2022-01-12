@@ -1,25 +1,42 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { TodoListContext } from "../../context/ToDoListContext";
 import TodoCard from "../TodoCard";
 import { Button, Input, Card, Title, Container } from "../UI";
 
 const ToDo = () => {
-  const todoList = useContext(TodoListContext);
+  const { todoList, adicionarTarefa } = useContext(TodoListContext);
 
-  console.log(todoList);
+  const [tarefa, setTarefa] = useState("");
+
+  const handleTarefa = (e) => {
+    const textoTarefa = e.target.value;
+    setTarefa(textoTarefa);
+  };
+
+  console.log("teste :" + todoList);
 
   return (
     <>
       <Card>
         <Title>Add Todo</Title>
-        <Input transparent type={"text"} placeholder="Insert your task" />
-        <Button primary>Adicionar</Button>
+        <Input
+          onChange={(e) => handleTarefa(e)}
+          transparent
+          type={"text"}
+          placeholder="Insert your task"
+        />
+        <span>descricao inválida</span>
+        <Button onClick={(e) => adicionarTarefa(tarefa)} primary>
+          Adicionar
+        </Button>
       </Card>
 
       <Container>
-        <TodoCard>Task#1</TodoCard>
-        <TodoCard>Task#2</TodoCard>
-        <TodoCard>Task#3</TodoCard>
+        {todoList.map((task, index) => (
+          <TodoCard key={index} tarefa={task.open} posicao={index}>
+            {task.description}
+          </TodoCard>
+        ))}
       </Container>
     </>
   );

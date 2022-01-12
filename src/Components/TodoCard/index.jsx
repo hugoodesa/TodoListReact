@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { TodoListContext } from "../../context/ToDoListContext";
+import ToDo from "../ToDo";
 import { Button, Card, Title, DescriptionTodo } from "../UI";
 
 const CardHiglight = styled(Card)`
@@ -8,14 +10,20 @@ const CardHiglight = styled(Card)`
   }
 `;
 
-const TodoCard = ({ children }) => {
+const TodoCard = ({ children, tarefa, posicao }) => {
+  const { removerTarefa } = useContext(TodoListContext);
+
   return (
     <CardHiglight size={"normal"}>
       <Title>Todo List</Title>
       <Card size={"sm"}>
         <DescriptionTodo>{children}</DescriptionTodo>
+        <DescriptionTodo>
+          Status : {tarefa ? "Aberta" : "Fechada"}
+        </DescriptionTodo>
       </Card>
-      <Button>Remover</Button>
+      <Button primary>Change status</Button>
+      <Button onClick={() => removerTarefa(posicao)}>Remover</Button>
     </CardHiglight>
   );
 };
