@@ -1,27 +1,29 @@
 import React, { useContext } from "react";
 import { TodoListContext } from "../../context/ToDoListContext";
-import { Button, Input, Card, Title, DescriptionTodo } from "../UI";
+import TodoCard from "../TodoCard";
+import { Button, Input, Card, Title, Container } from "../UI";
 
 const ToDo = () => {
-  const { nome } = useContext(TodoListContext);
+  const todoList = useContext(TodoListContext);
 
-  console.log(nome);
+  console.log(todoList);
 
   return (
     <>
       <Card>
         <Title>Add Todo</Title>
-        <Input transparent type={"text"} />
+        <Input transparent type={"text"} placeholder="Insert your task" />
         <Button primary>Adicionar</Button>
       </Card>
 
-      <Card>
-        <Title>Todo List</Title>
-        <Card sm>
-          <DescriptionTodo>Task #1</DescriptionTodo>
-        </Card>
-        <Button>Remover</Button>
-      </Card>
+      {/*
+        <Container>
+        <TodoCard>Task#1</TodoCard>
+        <TodoCard>Task#2</TodoCard>
+        <TodoCard>Task#3</TodoCard>
+      </Container>
+     */}
+      <Container>{todoList}</Container>
     </>
   );
 };
