@@ -6,11 +6,11 @@ TodoListContext.displayName = "TodoListProvider";
 
 export const TodoProvider = ({ children }) => {
   const [todoList, setTodoList] = useState([
-    { description: "description 1", open: false },
-    { description: "description 2", open: false },
-    { description: "description 3", open: false },
-    { description: "description 4", open: true },
-    { description: "description 5", open: false },
+    { description: "description 1", open: false, categoria: "games" },
+    { description: "description 2", open: false, categoria: "games" },
+    { description: "description 3", open: false, categoria: "Livros" },
+    { description: "description 4", open: true, categoria: "Livros" },
+    { description: "description 5", open: false, categoria: "Musicas" },
   ]);
 
   const adicionarTarefa = (textoTarefa) => {
@@ -42,7 +42,7 @@ export const TodoProvider = ({ children }) => {
 
   return (
     <TodoListContext.Provider
-      value={{ todoList, adicionarTarefa, removerTarefa }}
+      value={{ todoList, setTodoList, adicionarTarefa, removerTarefa }}
     >
       {children}
     </TodoListContext.Provider>

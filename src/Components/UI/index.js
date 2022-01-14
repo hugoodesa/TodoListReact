@@ -58,3 +58,10 @@ export const Container = styled.div`
   flex-wrap: wrap;
   justify-content: space-around;
 `;
+
+export const CardCategoria = styled(Card)`
+  color: wheat;
+  &:hover: {
+    cursor: pointer;
+  }
+`;

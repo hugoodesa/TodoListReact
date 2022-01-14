@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { TodoListContext } from "../../context/ToDoListContext";
-import ToDo from "../ToDo";
 import { Button, Card, Title, DescriptionTodo } from "../UI";
 
 const CardHiglight = styled(Card)`
@@ -11,7 +10,21 @@ const CardHiglight = styled(Card)`
 `;
 
 const TodoCard = ({ children, tarefa, posicao }) => {
-  const { removerTarefa } = useContext(TodoListContext);
+  const { removerTarefa, todoList, setTodoList } = useContext(TodoListContext);
+
+  const [nTarefa, setNTarefa] = useState(tarefa);
+
+  const handleTarefa = () => {
+    const novoStatusTarefa = { ...nTarefa };
+    novoStatusTarefa.open = !nTarefa.open;
+    setNTarefa(novoStatusTarefa);
+
+    const list = [...todoList];
+
+    list[posicao] = novoStatusTarefa;
+
+    setTodoList(list);
+  };
 
   return (
     <CardHiglight size={"normal"}>
@@ -19,10 +32,13 @@ const TodoCard = ({ children, tarefa, posicao }) => {
       <Card size={"sm"}>
         <DescriptionTodo>{children}</DescriptionTodo>
         <DescriptionTodo>
-          Status : {tarefa ? "Aberta" : "Fechada"}
+          Status : {nTarefa.open ? "Aberta" : "Fechada"}
         </DescriptionTodo>
+        <DescriptionTodo>Categoria : {nTarefa.categoria}</DescriptionTodo>
       </Card>
-      <Button primary>Change status</Button>
+      <Button primary onClick={(e) => handleTarefa()}>
+        Change status
+      </Button>
       <Button onClick={() => removerTarefa(posicao)}>Remover</Button>
     </CardHiglight>
   );
